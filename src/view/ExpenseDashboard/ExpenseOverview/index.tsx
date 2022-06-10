@@ -1,11 +1,37 @@
-import { useContext } from "react";
+import { useCallback, useContext, useEffect, useMemo } from "react";
 import {ExpenseType, MonthList} from "../../../constants/generic.enums";
 import { ExpensesContext } from "../../../contex/expenses.contex";
+import ExpensesHttp from "../../../http/expenses.http";
 import { TExpense } from "../../../models/expense.model";
 import "./index.scss"
 const ExpensesOverview = () => { 
     const { test, setTest } = useContext(ExpensesContext);
 
+    
+
+    const expensesHttp = useMemo(() => new ExpensesHttp(), []);
+
+    const fetchExpenses = useCallback(
+      async () => {
+        const data = await expensesHttp.getExpenses()
+        setTest(data)
+      },
+      [expensesHttp,test],
+    )
+    console.log(test)
+    useEffect(() => {
+        if(test.length === 0){
+            fetchExpenses()
+            console.log(test)
+        }
+        /* fetchExpenses() */ 
+      console.log("fetched") 
+    }, [fetchExpenses,test]) 
+    
+    /* if(!test){
+        fetchExpenses()
+        console.log("fetched")
+    } */
 
     const totalAmount = () => {
         let amount = 0
@@ -21,21 +47,19 @@ const ExpensesOverview = () => {
         return amount
     }
 
-    const date = new Date(test[0].date).getMonth()
+    /* const date = new Date(test[0].date).getMonth() */
 
     const totalAmountInMonth = (month: number, expenseType: string) => {
 
         const listMonth = test.filter((expense: TExpense) => new Date(expense.date).getMonth() === month)
-
         const listByType = listMonth.filter((expense: TExpense) => expense.type === expenseType)
-
         const amount = listByType.reduce((acc: number,cur: { price: string; }) => { return acc + +cur.price },0)
 
         return amount
     
     }
 
-    console.log(date)
+    /* console.log(date) */
     console.log(totalAmountInMonth(5, "Food"))
 
     return (
@@ -48,8 +72,8 @@ const ExpensesOverview = () => {
                         <p>{totalAmount()} Kn</p>
                     </article>
                     <section className="total-amounts__rest">
-                        {Object.keys(ExpenseType).map((key) => 
-                            <article className="amount">
+                        {Object.keys(ExpenseType).map((key,i) => 
+                            <article className="amount" key={i}>
                             <h4>{key}</h4>
                             <p>{totalAmountOfSomething(key)} Kn</p> 
                             </article> )
@@ -64,17 +88,17 @@ const ExpensesOverview = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            {Object.values(MonthList).map((key) => <th>{key}</th>)}
+                            {Object.values(MonthList).map((key,i) => <th key={i}>{key}</th>)}
                         
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            Object.keys(ExpenseType).map((type) =>
-                                <tr>
+                            Object.keys(ExpenseType).map((type,i) =>
+                                <tr key={i}>
                                 <td>{type}</td>
-                                {Object.keys(MonthList).map((key) => 
-                                    <td>{totalAmountInMonth(+key, type)} Kn </td> )} 
+                                {Object.keys(MonthList).map((key,i) => 
+                                    <td key={i}>{totalAmountInMonth(+key, type)} Kn </td> )} 
                                     </tr>   
                             )
                         }

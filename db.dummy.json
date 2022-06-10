@@ -1,32 +1,11 @@
 {
   "expenses": [
     {
-      "type": "Food",
-      "overview": "kruh, ulje",
-      "date": "2022-06-29",
-      "price": "30",
-      "id": 5
-    },
-    {
       "type": "Utilities",
       "overview": "cdd",
       "date": "2022-06-22",
       "price": "200",
       "id": 7
-    },
-    {
-      "type": "Utilities",
-      "overview": "struja",
-      "date": "2022-06-29",
-      "price": "200",
-      "id": 8
-    },
-    {
-      "type": "Fuel",
-      "overview": "Ina",
-      "date": "2022-06-14",
-      "price": "450",
-      "id": 9
     },
     {
       "type": "Fuel",
@@ -43,18 +22,18 @@
       "id": 11
     },
     {
-      "type": "Fuel",
-      "overview": "Test",
-      "date": "2022-06-29",
-      "price": "200",
-      "id": 12
-    },
-    {
       "type": "Rest",
       "overview": "odjeca",
       "date": "2022-06-22",
       "price": "400",
       "id": 13
+    },
+    {
+      "type": "Food",
+      "overview": "test",
+      "date": "2022-06-08",
+      "price": "200",
+      "id": 14
     }
   ]
 }

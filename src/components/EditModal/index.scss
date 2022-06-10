@@ -17,7 +17,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    min-width: 400px;
+    
+    min-width: 200px;
     min-height: 200px;
     padding: 20px 40px;
     border-radius: 5px;
@@ -39,3 +40,12 @@
         }
     }
 }
+
+@media (max-width: 600px){
+    .modal {
+        min-width: 100px;
+        width: 60%;
+    }
+        
+    
+    }

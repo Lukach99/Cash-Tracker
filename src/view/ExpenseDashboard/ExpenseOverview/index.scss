@@ -62,3 +62,22 @@ table{
 
     
 }
+
+@media (max-width: 600px){
+   .total-months{
+       width: 90%;
+       align-items: flex-start;
+
+       h2{
+           align-self: center;
+       }
+   }
+
+   table{
+       td{
+        width: auto;
+       }
+       
+   }
+    
+    }
